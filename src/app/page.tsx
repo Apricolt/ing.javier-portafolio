@@ -1,7 +1,14 @@
+import CoverParticles from "../../components/cover-particles"
+
 export default function Home() {
   return (
-    <main className = "w-screen h-screen flex justify-center items-center bg-blue-500">
-      <h1 className="text-4xl ">Javier Ordoñez</h1>
+
+    <main>
+      <span className= "flex min-h-[100vh] h-full bg-no-repeat bg-gradient-cover">
+         <CoverParticles/>
+        <p>Hola soy javier</p>
+      </span>
     </main>
+
   );
 }
