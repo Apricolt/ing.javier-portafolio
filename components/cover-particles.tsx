@@ -46,7 +46,7 @@ const CoverParticles = () => {
                         },
                         repulse: {
                             distance: 100,
-                            duration: 0.6,
+                            duration: 0.8,
                         },
                     },
                 },
@@ -55,7 +55,7 @@ const CoverParticles = () => {
                         value: "#ffffff",
                     },
                     links: {
-                        enable: false,  // Changed from true to false to remove the connecting lines
+                        enable: true,  // Changed from true to false to remove the connecting lines
                     },
                     move: {
                         direction: "none",
@@ -64,7 +64,7 @@ const CoverParticles = () => {
                             default: "bounce",
                         },
                         random: false,
-                        speed: 2,
+                        speed: 3,
                         straight: false,
                     },
                     number: {
