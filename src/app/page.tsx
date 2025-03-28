@@ -1,4 +1,4 @@
-import { Urbanist } from "next/font/google";
+
 import CoverParticles from "../../components/cover-particles"
 
 export default function Home() {
