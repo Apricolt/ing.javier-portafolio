@@ -27,7 +27,7 @@ export default function LoadingScreen() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="text-4xl md:text-6xl text-white font-extrabold"
+            className="text-4xl md:text-6xl text-white font-extrabold text-center px-4"
           >
             Bienvenidos a mi portafolio web
           </motion.h1>
