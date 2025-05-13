@@ -7,7 +7,7 @@ const projects = [
     id: 1,
     title: "Portfolio Personal",
     description: "Portfolio personal desarrollado con Next.js y Tailwind CSS, implementando las mejores prácticas de diseño y desarrollo web moderno.",
-    image: "/projects/portfolio.jpg",
+    image: "",
     technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript"],
     url: "https://github.com/tuusuario/portfolio"
   }
@@ -30,7 +30,7 @@ const certificates = [
     title: "Metodolias Agiles: SCRUM",
     issuer: "Certione",
     date: "2025",
-    image: "/Scrum.jpg",
+    image: "/SCRUM.jpg",
     url: "https://certione.org/certificate-verification/36E115E-36E1094-3125F23/",
     description: "Certificación en metodologías ágiles, específicamente en SCRUM, que permite a los participantes comprender y aplicar las mejores prácticas de desarrollo ágil en proyectos de software."
   }
