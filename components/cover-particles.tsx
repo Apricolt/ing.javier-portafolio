@@ -11,11 +11,7 @@ const CoverParticles = () => {
     const [ init, setInit ] = useState(false);
     useEffect(() => {
         initParticlesEngine(async (engine) => {
-            // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
-            // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-            // starting from v2 you can add only the features you need reducing the bundle size
-            //await loadAll(engine);
-            //await loadFull(engine);
+
             await loadSlim(engine);
             //await loadBasic(engine);
         }).then(() => {
@@ -28,7 +24,7 @@ const CoverParticles = () => {
         init && <Particles
             id="tsparticles"
             options={{
-                fpsLimit: 144,
+                fpsLimit: 120,
                 interactivity: {
                     events: {
                         onClick: {
@@ -46,7 +42,7 @@ const CoverParticles = () => {
                         },
                         repulse: {
                             distance: 100,
-                            duration: 0.8,
+                            duration: 2.5,
                         },
                     },
                 },
@@ -64,7 +60,7 @@ const CoverParticles = () => {
                             default: "bounce",
                         },
                         random: false,
-                        speed: 3,
+                        speed: 1,
                         straight: false,
                     },
                     number: {

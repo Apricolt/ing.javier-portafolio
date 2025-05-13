@@ -7,12 +7,12 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { href: '#welcome', label: 'Welcome' },
-    { href: '#about', label: 'About me' },
-    { href: '#portfolio', label: 'Portfolio' },
-    { href: '#nocode', label: 'No code' },
-    { href: '#experience', label: 'Experience' },
-    { href: '#contact', label: 'Contact' }
+    { href: '#welcome', label: 'Bienvenido' },
+    { href: '#about', label: 'Sobre mi' },
+    { href: '#portfolio', label: 'Portafolio' },
+    { href: '#nocode', label: 'Pasatiempos' },
+    { href: '#experience', label: 'Experiencia' },
+    { href: '#contact', label: 'Contacto' }
   ];
 
   const handleClick = (href: string) => {
@@ -45,7 +45,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full backdrop-blur-md bg-[#17072B]/80 border-b border-white/10 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 mr-8">
+        <div className="flex items-center justify-between h-20">
           <div className="text-2xl font-bold text-white">
             &lt;JAVORD/&gt;
           </div>
