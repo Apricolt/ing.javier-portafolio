@@ -10,8 +10,23 @@ const projects = [
     image: "",
     technologies: ["Next.js", "React", "Tailwind CSS", "TypeScript"],
     url: "https://github.com/tuusuario/portfolio"
+  },
+  {
+    id: 2,
+    title: "Sistema de Gestión de Tareas",
+    description: "Aplicación web full-stack para gestión de tareas con autenticación, roles de usuario y dashboard interactivo. Implementa patrones de diseño y arquitectura limpia.",
+    image: "/task-management.jpg",
+    technologies: ["Django", "React", "PostgreSQL", "Docker", "AWS"],
+    url: "https://github.com/tuusuario/task-management"
+  },
+  {
+    id: 3,
+    title: "API REST de E-commerce",
+    description: "API RESTful para plataforma de e-commerce con autenticación JWT, paginación, filtrado y documentación con Swagger. Implementa principios SOLID y patrones de diseño.",
+    image: "/api-ecommerce.jpg",
+    technologies: ["Spring Boot", "Java", "PostgreSQL", "JUnit", "Swagger"],
+    url: "https://github.com/tuusuario/ecommerce-api"
   }
-  // Agrega más proyectos aquí
 ];
 
 
@@ -43,64 +58,70 @@ const Portfolio = () => {
     switch (activeTab) {
       case 'projects':
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <article 
-                key={project.id}
-                className="bg-[#2d1b4d] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl"
-              >
-                <div className="relative pb-[56.25%]">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-bold text-xl mb-2 text-white">{project.title}</h3>
-                  <p className="text-gray-300 text-sm mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <span 
-                        key={tech}
-                        className="px-3 py-1 bg-[#3d2b5d] text-purple-300 text-xs rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
+          <div className="max-w-3xl mx-auto ">
+            <div className="flex overflow-x-auto gap-8 pb-6 custom-scrollbar">
+              {projects.map((project) => (
+                <article 
+                  key={project.id}
+                  className="flex-none w-[350px] h-[500px] bg-[#2d1b4d] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl"
+                >
+                  {project.image && (
+                    <div className="relative h-[200px]">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="p-6 h-[300px] flex flex-col">
+                    <h3 className="font-bold text-xl mb-2 text-white">{project.title}</h3>
+                    <p className="text-gray-300 text-sm mb-4 flex-grow">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <span 
+                          key={tech}
+                          className="px-3 py-1 bg-[#3d2b5d] text-purple-300 text-xs rounded-full"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
         );
 
       case 'certificates':
         return (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {certificates.map((cert) => (
-              <article 
-                key={cert.id}
-                className="bg-[#2d1b4d] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl cursor-pointer"
-                onClick={() => window.open(cert.url, '_blank')}
-              >
-                <div className="relative pb-[100%]">
-                  <img
-                    src={cert.image}
-                    alt={`Certificado ${cert.title}`}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-bold text-xl mb-2 text-white">{cert.title}</h3>
-                  <p className="text-gray-300 text-sm mb-2">{cert.description}</p>
-                  <div className="flex justify-between items-center mt-4">
-                    <span className="text-purple-400 text-sm">{cert.issuer}</span>
-                    <time className="text-gray-400 text-sm">{cert.date}</time>
+          <div className="max-w-3xl mx-auto">
+            <div className="flex overflow-x-auto gap-8 pb-6 custom-scrollbar">
+              {certificates.map((cert) => (
+                <article 
+                  key={cert.id}
+                  className="flex-none w-[350px] h-[500px] bg-[#2d1b4d] rounded-xl overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-105 hover:shadow-xl cursor-pointer"
+                  onClick={() => window.open(cert.url, '_blank')}
+                >
+                  <div className="relative h-[200px]">
+                    <img
+                      src={cert.image}
+                      alt={`Certificado ${cert.title}`}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
                   </div>
-                </div>
-              </article>
-            ))}
+                  <div className="p-6 h-[300px] flex flex-col">
+                    <h3 className="font-bold text-xl mb-2 text-white">{cert.title}</h3>
+                    <p className="text-gray-300 text-sm mb-2 flex-grow">{cert.description}</p>
+                    <div className="flex justify-between items-center mt-auto">
+                      <span className="text-purple-400 text-sm">{cert.issuer}</span>
+                      <time className="text-gray-400 text-sm">{cert.date}</time>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         );
 
@@ -111,7 +132,7 @@ const Portfolio = () => {
 
   return (
     <section className="container mx-auto px-4 py-8" aria-label="Portafolio de proyectos">
-      <header className="text-center mb-8">
+      <header className="text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
           Portfolio
         </h2>
@@ -143,7 +164,7 @@ const Portfolio = () => {
         </nav>
       </header>
 
-      <main className="mt-8 max-h-[60vh] overflow-y-auto custom-scrollbar">
+      <main className="mt-12">
         {renderContent()}
       </main>
     </section>

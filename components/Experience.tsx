@@ -4,24 +4,18 @@ import { useState } from "react";
 const academicExperience = [
   {
     id: 1,
-    title: "GreenFood",
-    description: "Diseñé e implementé una landing page para promocionar sus productos orgánicos.",
-    date: "Octubre - Noviembre 2024"
+    title: "Monitoria Bienestar Universitario",
+    description: "Colabore con el area de Bienestar Universitario en la Universidad de la Universidad Cooperativa de Colombia, donde estuve acargo de diseñar y crear imagenes para las redes sociales de la universidad, donde aprendi principios basicos de UI",
+    date: "Febrero - Mayo 2024"
   },
-  {
-    id: 2,
-    title: "M&L",
-    description: "Desarrollo de una página web con el propósito de mostrar su catálogo de productos",
-    date: "Enero - Abril 2025"
-  }
 ];
 
 const workExperience = [
   {
-    id: 3,
+    id: 2,
     title: "Café Express",
     description: "Creé un sistema web para subir imágenes de granos de café y clasificar el nivel de tostado con IA.",
-    date: ""
+    date: "Febrero - Mayo 2024"
   }
 ];
 
