@@ -32,7 +32,7 @@ const Welcome = () => {
             transition={{ duration: 0.5, delay: 3.2 }}
           >
             <Link 
-              href="https://github.com" 
+              href="https://github.com/Apricolt" 
               target="_blank"
               aria-label="GitHub"
               className="text-white hover:text-gray-300 transition-all duration-300 transform hover:scale-110"
@@ -49,7 +49,7 @@ const Welcome = () => {
             </Link>
 
             <Link 
-              href="https://www.linkedin.com" 
+              href="https://www.linkedin.com/in/javier-ordo%C3%B1ez-4b136a2b8/" 
               target="_blank"
               aria-label="LinkedIn"
               className="text-white hover:text-gray-300 transition-all duration-300 transform hover:scale-110"
