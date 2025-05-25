@@ -15,14 +15,14 @@ const projects = [
     id: 2,
     title: "Café Colombia",
     description: "Aplicación web que muestra los departamentos que más producen café en Colombia, con un chatbot integrado para que los usuarios puedan solicitar información sobre el café y los departamentos productores.",
-    image: "/cafe.png",
+    image: "/Cafe.png",
     technologies: ["Next.js", "HTML", "Tailwind CSS", "TypeScript"],
     url: "https://diseno-cafe-g6xw8icdy-javier-ordonezs-projects.vercel.app/"
   }
 ];
 
 const certificates = [
-  {
+  { 
     id: 1,
     title: "Python for Data Science",
     issuer: "IBM",
