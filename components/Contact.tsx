@@ -24,7 +24,7 @@ const Contact = () => {
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error' | 'config-error'>('idle');
 
   // Función para validar email
   const isValidEmail = (email: string): boolean => {
@@ -74,7 +74,7 @@ const Contact = () => {
     }
 
     // Resetear status si había un error previo
-    if (submitStatus === 'error') {
+    if (submitStatus === 'error' || submitStatus === 'config-error') {
       setSubmitStatus('idle');
     }
   };
@@ -102,7 +102,11 @@ const Contact = () => {
       // Verificar que las variables de entorno estén configuradas
       if (!serviceId || !templateId || !publicKey) {
         console.error('Variables de entorno de EmailJS no configuradas');
-        throw new Error('Configuración de EmailJS incompleta. Revisa tu archivo .env.local');
+        console.error('Service ID:', serviceId ? 'Configurado' : 'FALTA');
+        console.error('Template ID:', templateId ? 'Configurado' : 'FALTA');
+        console.error('Public Key:', publicKey ? 'Configurado' : 'FALTA');
+        setSubmitStatus('config-error');
+        return;
       }
 
       // Preparar los datos del template
@@ -134,6 +138,16 @@ const Contact = () => {
 
     } catch (error) {
       console.error('Error al enviar email:', error);
+      
+      // Mostrar mensaje más específico en desarrollo
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Detalles del error:', {
+          serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ? 'OK' : 'FALTA',
+          templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ? 'OK' : 'FALTA',
+          publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ? 'OK' : 'FALTA'
+        });
+      }
+      
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -159,6 +173,19 @@ const Contact = () => {
         {submitStatus === 'error' && (
           <aside className="mb-6 p-4 rounded-lg bg-red-600 text-white text-center" role="alert">
             Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo.
+          </aside>
+        )}
+
+        {submitStatus === 'config-error' && (
+          <aside className="mb-6 p-4 rounded-lg bg-orange-600 text-white text-center" role="alert">
+            <div className="mb-2 font-medium">⚠️ Configuración Incompleta</div>
+            <div className="text-sm">
+              El formulario no está configurado correctamente. 
+              {process.env.NODE_ENV === 'development' 
+                ? ' Revisa las variables de entorno en .env.local' 
+                : ' Contacta al administrador del sitio.'
+              }
+            </div>
           </aside>
         )}
 
