@@ -109,14 +109,16 @@ const Contact = () => {
         return;
       }
 
+      // Preparar los datos del template
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
-        to_name: 'Javier',
+        to_name: 'Javier', // Cambia esto por tu nombre
         reply_to: formData.email,
       };
 
+      // Enviar email usando EmailJS
       const response = await emailjs.send(
         serviceId,
         templateId,
@@ -127,6 +129,7 @@ const Contact = () => {
       console.log('Email enviado exitosamente:', response);
       setSubmitStatus('success');
       
+      // Limpiar formulario después del éxito
       setFormData({
         name: '',
         email: '',
@@ -136,6 +139,7 @@ const Contact = () => {
     } catch (error) {
       console.error('Error al enviar email:', error);
       
+      // Mostrar mensaje más específico en desarrollo
       if (process.env.NODE_ENV === 'development') {
         console.error('Detalles del error:', {
           serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ? 'OK' : 'FALTA',
@@ -177,6 +181,10 @@ const Contact = () => {
             <div className="mb-2 font-medium">⚠️ Configuración Incompleta</div>
             <div className="text-sm">
               El formulario no está configurado correctamente. 
+              {process.env.NODE_ENV === 'development' 
+                ? ' Revisa las variables de entorno en .env.local' 
+                : ' Contacta al administrador del sitio.'
+              }
             </div>
           </aside>
         )}
