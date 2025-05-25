@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function DebugEnv() {
   const vars = {
     SERVICE_ID: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
@@ -37,12 +39,12 @@ export default function DebugEnv() {
       </div>
       
       <div className="mt-8">
-        <a 
+        <Link 
           href="/" 
           className="inline-block px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
         >
           Volver al Portfolio
-        </a>
+        </Link>
       </div>
     </div>
   );
