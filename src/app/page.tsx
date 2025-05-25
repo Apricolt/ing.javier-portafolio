@@ -61,8 +61,8 @@ export default function Home() {
         </section>
 
         {/* Sección Contacto */}
-        <section id="contact" className="min-h-screen">
-          <div className="pt-20">
+        <section id="contact">
+          <div className="">
             <Contact />
           </div>
         </section>

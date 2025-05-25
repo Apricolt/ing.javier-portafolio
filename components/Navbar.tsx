@@ -27,7 +27,7 @@ const Navbar = () => {
   const NavLink = ({ href, label }: { href: string; label: string }) => (
     <button
       onClick={() => handleClick(href)}
-      className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 ease-out
+      className={`relative px-3 py-2 text-sm transition-all duration-300 ease-out
         ${activeSection === href 
           ? 'text-white' 
           : 'text-gray-300 hover:text-white'
@@ -111,7 +111,7 @@ const Navbar = () => {
                       }
                     `}
                   >
-                    <span className="relative z-10 text-sm font-medium">{item.label}</span>
+                    <span className="relative z-10 text-sm">{item.label}</span>
                     {activeSection === item.href && (
                       <span className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#46367C] to-[#4A2FBD] rounded-l-lg" />
                     )}
@@ -124,7 +124,7 @@ const Navbar = () => {
           {/* Footer del sidebar */}
           <div className="p-6 border-t border-white/10">
             <div className="text-center text-sm text-white">
-              <span className="font-medium">
+              <span>
                 Developed by JAVORD
               </span>
             </div>

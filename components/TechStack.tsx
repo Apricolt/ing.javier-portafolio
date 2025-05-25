@@ -20,81 +20,85 @@ const techStack = {
     { name: "Postman", icon: "postman.svg" },
     { name: "PostgreSQL", icon: "postgresql.svg" },
     { name: "Git", icon: "git.svg" },
-    { name: "GitHub", icon: "github.svg" }
+    { name: "GitHub", icon: "github.svg" },
+    { name: "AWS", icon: "icons8-aws.svg" },
+    { name: "Vercel", icon: "Vercel_favicon.svg" },
+    { name: "Figma", icon: "icons8-figma.svg" }
   ]
 };
 
 const TechStack = () => {
   return (
-    <div className="max-w-4xl mx-auto">
+    <section className="max-w-4xl mx-auto" aria-labelledby="techstack-heading">
+      <h3 id="techstack-heading" className="sr-only">Stack tecnológico</h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
         {/* Lenguajes */}
-        <article className="bg-[#2d1b4d] p-4 md:p-8 rounded-xl shadow-lg">
+        <article className="bg-[#2d1b4d] p-4 md:p-8 rounded-xl transition-all duration-500 md:hover:shadow-[0_0_30px_rgba(147,51,234,0.5)]">
           <header className="text-center mb-4 md:mb-8">
-            <h3 className="text-xl md:text-2xl font-bold text-white">Lenguajes</h3>
+            <h4 className="text-xl md:text-2xl font-bold text-white">Lenguajes</h4>
           </header>
-          <div className="grid grid-cols-3 md:grid-cols-2 gap-3 md:gap-6">
+          <ul className="grid grid-cols-3 md:grid-cols-2 gap-3 md:gap-6 list-none">
             {techStack.languages.map((tech) => (
-              <figure
-                key={tech.name}
-                className="flex flex-col items-center p-2 md:p-4 hover:bg-[#3d2b5d] rounded-lg transition-all duration-300"
-              >
-                <img
-                  src={`/icons/${tech.icon}`}
-                  alt={tech.name}
-                  className="w-10 h-10 md:w-16 md:h-16 mb-2 md:mb-3"
-                />
-                <figcaption className="text-xs md:text-base text-gray-300 font-medium text-center">{tech.name}</figcaption>
-              </figure>
+              <li key={tech.name}>
+                <figure className="flex flex-col items-center p-2 md:p-4 md:hover:bg-[#3d2b5d] active:bg-[#3d2b5d] rounded-lg transition-all duration-300">
+                  <img
+                    src={`/icons/${tech.icon}`}
+                    alt=""
+                    className="w-10 h-10 md:w-16 md:h-16 mb-2 md:mb-3"
+                    aria-hidden="true"
+                  />
+                  <figcaption className="text-xs md:text-base text-gray-300 text-center">{tech.name}</figcaption>
+                </figure>
+              </li>
             ))}
-          </div>
+          </ul>
         </article>
 
         {/* Frameworks */}
-        <article className="bg-[#2d1b4d] p-4 md:p-8 rounded-xl shadow-lg">
+        <article className="bg-[#2d1b4d] p-4 md:p-8 rounded-xl transition-all duration-500 md:hover:shadow-[0_0_30px_rgba(147,51,234,0.5)]">
           <header className="text-center mb-4 md:mb-8">
-            <h3 className="text-xl md:text-2xl font-bold text-white">Frameworks</h3>
+            <h4 className="text-xl md:text-2xl font-bold text-white">Frameworks</h4>
           </header>
-          <div className="grid grid-cols-2 gap-3 md:gap-6">
+          <ul className="grid grid-cols-2 gap-3 md:gap-6 list-none">
             {techStack.frameworks.map((tech) => (
-              <figure
-                key={tech.name}
-                className="flex flex-col items-center p-2 md:p-4 hover:bg-[#3d2b5d] rounded-lg transition-all duration-300"
-              >
-                <img
-                  src={`/icons/${tech.icon}`}
-                  alt={tech.name}
-                  className="w-10 h-10 md:w-16 md:h-16 mb-2 md:mb-3"
-                />
-                <figcaption className="text-xs md:text-base text-gray-300 font-medium text-center">{tech.name}</figcaption>
-              </figure>
+              <li key={tech.name}>
+                <figure className="flex flex-col items-center p-2 md:p-4 md:hover:bg-[#3d2b5d] active:bg-[#3d2b5d] rounded-lg transition-all duration-300">
+                  <img
+                    src={`/icons/${tech.icon}`}
+                    alt=""
+                    className="w-10 h-10 md:w-16 md:h-16 mb-2 md:mb-3"
+                    aria-hidden="true"
+                  />
+                  <figcaption className="text-xs md:text-base text-gray-300 text-center">{tech.name}</figcaption>
+                </figure>
+              </li>
             ))}
-          </div>
+          </ul>
         </article>
 
         {/* Herramientas */}
-        <article className="bg-[#2d1b4d] p-4 md:p-8 rounded-xl shadow-lg">
+        <article className="bg-[#2d1b4d] p-4 md:p-8 rounded-xl transition-all duration-500 md:hover:shadow-[0_0_30px_rgba(147,51,234,0.5)]">
           <header className="text-center mb-4 md:mb-8">
-            <h3 className="text-xl md:text-2xl font-bold text-white">Herramientas</h3>
+            <h4 className="text-xl md:text-2xl font-bold text-white">Herramientas</h4>
           </header>
-          <div className="grid grid-cols-3 md:grid-cols-2 gap-3 md:gap-6">
+          <ul className="grid grid-cols-3 md:grid-cols-2 gap-3 md:gap-6 list-none">
             {techStack.tools.map((tech) => (
-              <figure
-                key={tech.name}
-                className="flex flex-col items-center p-2 md:p-4 hover:bg-[#3d2b5d] rounded-lg transition-all duration-300"
-              >
-                <img
-                  src={`/icons/${tech.icon}`}
-                  alt={tech.name}
-                  className="w-10 h-10 md:w-16 md:h-16 mb-2 md:mb-3"
-                />
-                <figcaption className="text-xs md:text-base text-gray-300 font-medium text-center">{tech.name}</figcaption>
-              </figure>
+              <li key={tech.name}>
+                <figure className="flex flex-col items-center p-2 md:p-4 md:hover:bg-[#3d2b5d] active:bg-[#3d2b5d] rounded-lg transition-all duration-300">
+                  <img
+                    src={`/icons/${tech.icon}`}
+                    alt=""
+                    className="w-10 h-10 md:w-16 md:h-16 mb-2 md:mb-3"
+                    aria-hidden="true"
+                  />
+                  <figcaption className="text-xs md:text-base text-gray-300 text-center">{tech.name}</figcaption>
+                </figure>
+              </li>
             ))}
-          </div>
+          </ul>
         </article>
       </div>
-    </div>
+    </section>
   );
 };
 

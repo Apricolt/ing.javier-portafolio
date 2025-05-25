@@ -22,21 +22,14 @@ export default function LoadingScreen() {
           transition={{ duration: 0.5 }}
           className="fixed inset-0 flex items-center justify-center z-[100]"
           style={{ 
-            backgroundColor: "#17072B",
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            width: "100vw",
-            height: "100vh"
+            background: 'linear-gradient(135deg, #17072B 0%, #2d1b4d 50%, #17072B 100%)'
           }}
         >
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="text-4xl md:text-6xl text-white font-extrabold text-center px-4"
+            className="text-4xl md:text-6xl text-white font-bold text-center px-4"
           >
             Bienvenidos a mi portafolio web
           </motion.h1>
