@@ -109,16 +109,14 @@ const Contact = () => {
         return;
       }
 
-      // Preparar los datos del template
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
         message: formData.message,
-        to_name: 'Javier', // Cambia esto por tu nombre
+        to_name: 'Javier',
         reply_to: formData.email,
       };
 
-      // Enviar email usando EmailJS
       const response = await emailjs.send(
         serviceId,
         templateId,
@@ -129,7 +127,6 @@ const Contact = () => {
       console.log('Email enviado exitosamente:', response);
       setSubmitStatus('success');
       
-      // Limpiar formulario después del éxito
       setFormData({
         name: '',
         email: '',
@@ -139,7 +136,6 @@ const Contact = () => {
     } catch (error) {
       console.error('Error al enviar email:', error);
       
-      // Mostrar mensaje más específico en desarrollo
       if (process.env.NODE_ENV === 'development') {
         console.error('Detalles del error:', {
           serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ? 'OK' : 'FALTA',
@@ -181,10 +177,6 @@ const Contact = () => {
             <div className="mb-2 font-medium">⚠️ Configuración Incompleta</div>
             <div className="text-sm">
               El formulario no está configurado correctamente. 
-              {process.env.NODE_ENV === 'development' 
-                ? ' Revisa las variables de entorno en .env.local' 
-                : ' Contacta al administrador del sitio.'
-              }
             </div>
           </aside>
         )}
@@ -203,10 +195,11 @@ const Contact = () => {
                 onChange={handleInputChange}
                 className={`w-full px-4 py-2 rounded-lg bg-[#2d1b4d] text-white border transition-all duration-300 
                   placeholder:text-gray-400
-                  [&:-webkit-autofill]:bg-[#2d1b4d] [&:-webkit-autofill]:text-white [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_#2d1b4d]
-                  [&:-webkit-autofill:hover]:bg-[#2d1b4d] [&:-webkit-autofill:hover]:text-white [&:-webkit-autofill:hover]:shadow-[inset_0_0_0px_1000px_#2d1b4d]
-                  [&:-webkit-autofill:focus]:bg-[#2d1b4d] [&:-webkit-autofill:focus]:text-white [&:-webkit-autofill:focus]:shadow-[inset_0_0_0px_1000px_#2d1b4d]
-                  [&:-webkit-autofill:active]:bg-[#2d1b4d] [&:-webkit-autofill:active]:text-white [&:-webkit-autofill:active]:shadow-[inset_0_0_0px_1000px_#2d1b4d]
+                  [&:-webkit-autofill]:!bg-[#2d1b4d] [&:-webkit-autofill]:!text-white [&:-webkit-autofill]:!shadow-[inset_0_0_0px_1000px_#2d1b4d] [&:-webkit-autofill]:!border-purple-500
+                  [&:-webkit-autofill:hover]:!bg-[#2d1b4d] [&:-webkit-autofill:hover]:!text-white [&:-webkit-autofill:hover]:!shadow-[inset_0_0_0px_1000px_#2d1b4d]
+                  [&:-webkit-autofill:focus]:!bg-[#2d1b4d] [&:-webkit-autofill:focus]:!text-white [&:-webkit-autofill:focus]:!shadow-[inset_0_0_0px_1000px_#2d1b4d]
+                  [&:-webkit-autofill:active]:!bg-[#2d1b4d] [&:-webkit-autofill:active]:!text-white [&:-webkit-autofill:active]:!shadow-[inset_0_0_0px_1000px_#2d1b4d]
+                  [&:-webkit-autofill::selection]:!bg-purple-600 [&:-webkit-autofill::selection]:!text-white
                   ${errors.name 
                     ? 'border-red-500 focus:ring-2 focus:ring-red-600' 
                     : 'border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600'
@@ -234,10 +227,11 @@ const Contact = () => {
                 onChange={handleInputChange}
                 className={`w-full px-4 py-2 rounded-lg bg-[#2d1b4d] text-white border transition-all duration-300 
                   placeholder:text-gray-400
-                  [&:-webkit-autofill]:bg-[#2d1b4d] [&:-webkit-autofill]:text-white [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_#2d1b4d]
-                  [&:-webkit-autofill:hover]:bg-[#2d1b4d] [&:-webkit-autofill:hover]:text-white [&:-webkit-autofill:hover]:shadow-[inset_0_0_0px_1000px_#2d1b4d]
-                  [&:-webkit-autofill:focus]:bg-[#2d1b4d] [&:-webkit-autofill:focus]:text-white [&:-webkit-autofill:focus]:shadow-[inset_0_0_0px_1000px_#2d1b4d]
-                  [&:-webkit-autofill:active]:bg-[#2d1b4d] [&:-webkit-autofill:active]:text-white [&:-webkit-autofill:active]:shadow-[inset_0_0_0px_1000px_#2d1b4d]
+                  [&:-webkit-autofill]:!bg-[#2d1b4d] [&:-webkit-autofill]:!text-white [&:-webkit-autofill]:!shadow-[inset_0_0_0px_1000px_#2d1b4d] [&:-webkit-autofill]:!border-purple-500
+                  [&:-webkit-autofill:hover]:!bg-[#2d1b4d] [&:-webkit-autofill:hover]:!text-white [&:-webkit-autofill:hover]:!shadow-[inset_0_0_0px_1000px_#2d1b4d]
+                  [&:-webkit-autofill:focus]:!bg-[#2d1b4d] [&:-webkit-autofill:focus]:!text-white [&:-webkit-autofill:focus]:!shadow-[inset_0_0_0px_1000px_#2d1b4d]
+                  [&:-webkit-autofill:active]:!bg-[#2d1b4d] [&:-webkit-autofill:active]:!text-white [&:-webkit-autofill:active]:!shadow-[inset_0_0_0px_1000px_#2d1b4d]
+                  [&:-webkit-autofill::selection]:!bg-purple-600 [&:-webkit-autofill::selection]:!text-white
                   ${errors.email 
                     ? 'border-red-500 focus:ring-2 focus:ring-red-600' 
                     : 'border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600'

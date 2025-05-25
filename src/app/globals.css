@@ -121,3 +121,36 @@ html {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
     background: rgba(139, 92, 246, 0.7);
 }
+
+/* Estilos para autocompletado del formulario */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: inset 0 0 0px 1000px #2d1b4d !important;
+  -webkit-text-fill-color: #ffffff !important;
+  box-shadow: inset 0 0 0px 1000px #2d1b4d !important;
+  background-color: #2d1b4d !important;
+  color: #ffffff !important;
+  border-color: #9333ea !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Estilos adicionales para compatibilidad */
+input:-webkit-autofill::first-line {
+  color: #ffffff !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+}
+
+/* Para Firefox */
+input:-moz-autofill {
+  background-color: #2d1b4d !important;
+  color: #ffffff !important;
+}
+
+/* Forzar color de texto en autocompletado */
+#name:-webkit-autofill,
+#email:-webkit-autofill {
+  -webkit-text-fill-color: #ffffff !important;
+}

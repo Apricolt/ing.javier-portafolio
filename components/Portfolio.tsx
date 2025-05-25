@@ -17,7 +17,7 @@ const projects = [
     description: "Aplicación web que muestra los departamentos que más producen café en Colombia, con un chatbot integrado para que los usuarios puedan solicitar información sobre el café y los departamentos productores.",
     image: "/Cafe.png",
     technologies: ["Next.js", "HTML", "Tailwind CSS", "TypeScript"],
-    url: "https://diseno-cafe-g6xw8icdy-javier-ordonezs-projects.vercel.app/"
+    url: "https://diseno-cafe.vercel.app/"
   }
 ];
 
