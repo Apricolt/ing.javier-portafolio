@@ -1,74 +1,29 @@
-import Welcome from "@/components/Welcome";
-import Aboutme from "@/components/Aboutme";
-import Portfolio from "@/components/Portfolio";
-import NoCode from "@/components/NoCode";
-import Experience from "@/components/Experience";
-import Contact from "../../components/Contact";
-import CoverParticles from "@/components/cover-particles";
-import Navbar from "@/components/Navbar";
-import LoadingScreen from "@/components/LoadingScreen";
+import Preloader from "@/components/layout/Preloader";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import Hero from "@/components/sections/Hero";
+import Approach from "@/components/sections/Approach";
+import Projects from "@/components/sections/Projects";
+import Certifications from "@/components/sections/Certifications";
+import TechStack from "@/components/sections/TechStack";
+import Experience from "@/components/sections/Experience";
+import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
-    <main className="min-h-screen overflow-x-hidden relative">
-      <LoadingScreen />
-      
-      {/* Particles en el fondo */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <CoverParticles />
-      </div>
-
-      {/* Navbar fijo en la parte superior */}
-      <div className="fixed top-0 w-full z-50">
-        <Navbar />
-      </div>
-
-      {/* Contenido principal */}
-      <div className="relative z-10">
-        {/* Sección de Bienvenida */}
-        <section id="welcome" className="min-h-screen">
-          <div className="pt-20">
-            <Welcome />
-          </div>
-        </section>
-
-        {/* Sección Sobre Mí */}
-        <section id="about" className="min-h-screen">
-          <div className="pt-20">
-            <Aboutme />
-          </div>
-        </section>
-
-        {/* Sección Portafolio */}
-        <section id="portfolio" className="min-h-screen">
-          <div className="pt-20">
-            <Portfolio />
-          </div>
-        </section>
-
-        {/* Sección No Code */}
-        <section id="nocode" className="min-h-screen">
-          <div className="pt-20">
-            <NoCode />
-          </div>
-        </section>
-
-        {/* Sección Experiencia */}
-        <section id="experience" className="min-h-screen">
-          <div className="pt-20">
-            <Experience />
-          </div>
-        </section>
-
-        {/* Sección Contacto */}
-        <section id="contact">
-          <div className="">
-            <Contact />
-          </div>
-        </section>
-      </div>
-    </main>
+    <>
+      <Preloader />
+      <Header />
+      <main>
+        <Hero />
+        <Approach />
+        <Projects />
+        <Certifications />
+        <TechStack />
+        <Experience />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 }
-
-

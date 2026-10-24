@@ -1,0 +1,101 @@
+"use client";
+
+import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
+import AbstractVisual from "@/components/ui/AbstractVisual";
+import { profile } from "@/data/profile";
+
+/**
+ * "Mi enfoque": una ventana pequeña con el visual generativo que crece
+ * hasta ocupar toda la pantalla mientras se hace scroll.
+ */
+export default function Approach() {
+  const root = useRef<HTMLElement>(null);
+  const [w1, w2] = profile.approachTitle;
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const small = () => window.innerWidth < 768;
+        gsap.set(".ap-copy", { opacity: 0, y: 40 });
+
+        gsap
+          .timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+              trigger: root.current,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 0.7,
+              invalidateOnRefresh: true,
+            },
+          })
+          .fromTo(
+            ".ap-frame",
+            {
+              width: () => (small() ? window.innerWidth * 0.72 : Math.min(window.innerWidth * 0.34, 500)),
+              height: () => window.innerHeight * (small() ? 0.36 : 0.44),
+              borderRadius: 28,
+            },
+            { width: () => window.innerWidth, height: () => window.innerHeight, borderRadius: 0, duration: 0.6 },
+            0,
+          )
+          .to(".ap-w1", { xPercent: -70, opacity: 0, duration: 0.45 }, 0)
+          .to(".ap-w2", { xPercent: 45, opacity: 0, duration: 0.45 }, 0)
+          .to(".ap-hint", { opacity: 0, duration: 0.1 }, 0)
+          .to(".ap-scrim", { opacity: 1, duration: 0.25 }, 0.5)
+          .to(".ap-copy", { opacity: 1, y: 0, duration: 0.25 }, 0.6)
+          .to({}, { duration: 0.15 });
+      });
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        gsap.set(".ap-frame", { width: "100%", height: "100%", borderRadius: 0 });
+        gsap.set(".ap-title, .ap-hint", { autoAlpha: 0 });
+        gsap.set(".ap-scrim", { opacity: 1 });
+        gsap.set(".ap-copy", { opacity: 1, y: 0 });
+      });
+
+      return () => mm.revert();
+    },
+    { scope: root },
+  );
+
+  return (
+    <section id="enfoque" ref={root} className="relative h-[260vh] bg-ink" aria-labelledby="enfoque-title">
+      <div className="sticky top-0 h-[100svh] overflow-hidden">
+        <div className="ap-frame absolute left-1/2 top-1/2 h-[44vh] w-[34vw] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[28px] border border-white/10">
+          {/* El lienzo mide siempre lo mismo que la pantalla; el marco actúa como ventana */}
+          <div className="grain absolute left-1/2 top-1/2 h-[100svh] w-screen -translate-x-1/2 -translate-y-1/2">
+            <AbstractVisual />
+          </div>
+          <div className="ap-scrim absolute inset-0 bg-black/55 opacity-0" />
+        </div>
+
+        <h2
+          id="enfoque-title"
+          className="ap-title pointer-events-none absolute inset-0 z-20 flex items-center justify-center gap-[0.25em] font-display text-[clamp(3rem,11vw,10.5rem)] font-bold uppercase leading-none tracking-tight text-white [text-shadow:0_8px_40px_rgb(0_0_0/0.55)]"
+        >
+          <span className="ap-w1 inline-block">{w1}</span>
+          <span className="ap-w2 inline-block">{w2}</span>
+        </h2>
+
+        <div className="ap-copy absolute inset-0 z-30 flex flex-col items-center justify-center gap-7 px-6 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-volt/40 bg-volt/10 px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.3em] text-volt-light">
+            <span className="h-1.5 w-1.5 rounded-full bg-volt" />
+            {w1} {w2}
+          </span>
+          <p className="max-w-3xl font-display text-[clamp(1.35rem,2.6vw,2.25rem)] font-medium leading-snug text-bone">
+            {profile.approach}
+          </p>
+        </div>
+
+        <p className="ap-hint absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 font-mono text-[10px] uppercase tracking-[0.4em] text-ash">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-volt" />
+          Desliza para expandir
+        </p>
+      </div>
+    </section>
+  );
+}
