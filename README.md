@@ -37,7 +37,7 @@ src/
   components/
     layout/     Preloader, Header + menú, Footer, Providers (scroll suave)
     sections/   Hero, Approach, Projects, Certifications, TechStack, Experience, Contact
-    ui/         nombre animado, partículas, visual generativo, ouroboros, tarjetas, botones, íconos
+    ui/         nombre animado, partículas, visual generativo, peces koi, tarjetas, botones, íconos
 ```
 
 ## Formulario de contacto

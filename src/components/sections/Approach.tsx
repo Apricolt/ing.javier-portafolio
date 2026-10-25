@@ -1,30 +1,19 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import AbstractVisual from "@/components/ui/AbstractVisual";
-import Ouroboros from "@/components/ui/Ouroboros";
+import KoiPond from "@/components/ui/KoiPond";
 import { useApp } from "@/components/layout/Providers";
 
 /**
- * "Mi enfoque": una ventana pequeña con el visual generativo que crece
- * hasta ocupar toda la pantalla mientras se hace scroll.
+ * "Mi enfoque": una ventana pequeña con el visual generativo y los koi,
+ * que crece hasta ocupar toda la pantalla mientras se hace scroll.
  */
 export default function Approach() {
   const root = useRef<HTMLElement>(null);
-  const ouroRef = useRef<HTMLDivElement>(null);
   const { t } = useApp();
   const [w1, w2] = t.profile.approachTitle;
-
-  // Pausa el giro del ouroboros mientras la sección no se ve (ahorra batería)
-  useEffect(() => {
-    const section = root.current;
-    const ouro = ouroRef.current;
-    if (!section || !ouro) return;
-    const io = new IntersectionObserver(([e]) => ouro.classList.toggle("anim-paused", !e.isIntersecting));
-    io.observe(section);
-    return () => io.disconnect();
-  }, []);
 
   useGSAP(
     () => {
@@ -58,8 +47,8 @@ export default function Approach() {
           .to(".ap-w1", { xPercent: -70, opacity: 0, duration: 0.45 }, 0)
           .to(".ap-w2", { xPercent: 45, opacity: 0, duration: 0.45 }, 0)
           .to(".ap-hint", { opacity: 0, duration: 0.1 }, 0)
-          .fromTo(".ap-ouro-inner", { scale: 0.92 }, { scale: 1.06, duration: 0.85 }, 0)
-          .to(".ap-ouro", { opacity: 0.22, duration: 0.25 }, 0.5)
+          .fromTo(".ap-koi-inner", { scale: 0.92 }, { scale: 1.06, duration: 0.85 }, 0)
+          .to(".ap-koi", { opacity: 0.22, duration: 0.25 }, 0.5)
           .to(".ap-scrim", { opacity: 1, duration: 0.25 }, 0.5)
           .to(".ap-copy", { opacity: 1, y: 0, duration: 0.25 }, 0.6)
           .to({}, { duration: 0.15 });
@@ -69,7 +58,7 @@ export default function Approach() {
         gsap.set(".ap-frame", { width: "100%", height: "100%", borderRadius: 0 });
         gsap.set(".ap-title, .ap-hint", { autoAlpha: 0 });
         gsap.set(".ap-scrim", { opacity: 1 });
-        gsap.set(".ap-ouro", { opacity: 0.22 });
+        gsap.set(".ap-koi", { opacity: 0.22 });
         gsap.set(".ap-copy", { opacity: 1, y: 0 });
       });
 
@@ -86,10 +75,10 @@ export default function Approach() {
           <div className="grain absolute left-1/2 top-1/2 h-[100svh] w-screen -translate-x-1/2 -translate-y-1/2">
             <AbstractVisual />
           </div>
-          {/* El ouroboros crece con la ventana: siempre ocupa el 84% de su lado más corto */}
-          <div ref={ouroRef} className="ap-ouro pointer-events-none absolute inset-0 grid place-items-center">
-            <div className="ap-ouro-inner aspect-square w-[min(84cqw,84cqh)]">
-              <Ouroboros />
+          {/* Los koi crecen con la ventana: siempre ocupan el 90% de su lado más corto */}
+          <div className="ap-koi pointer-events-none absolute inset-0 grid place-items-center">
+            <div className="ap-koi-inner aspect-square w-[min(90cqw,90cqh)]">
+              <KoiPond />
             </div>
           </div>
           <div className="ap-scrim absolute inset-0 bg-black/55 opacity-0" />

@@ -154,12 +154,6 @@
     );
   }
   .spotlight:hover::before { opacity: 1; }
-
-  /* Pausa todas las animaciones CSS de un bloque (p. ej. fuera de pantalla) */
-  .anim-paused,
-  .anim-paused * {
-    animation-play-state: paused !important;
-  }
 }
 
 /* Transiciones de página (View Transitions API) */
