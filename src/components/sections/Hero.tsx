@@ -17,18 +17,22 @@ export default function Hero() {
     () => {
       const reduced = prefersReducedMotion();
 
-      // Estado inicial oculto (el preloader lo cubre mientras tanto)
+      // Estado inicial (el preloader lo cubre mientras tanto). Los textos NO se ocultan con
+      // opacity: 0, para que el navegador los pinte desde el primer cuadro (mejora el LCP en
+      // móvil); su entrada es una subida con desenfoque.
       gsap.set(".pt-letter-wrap > span", { yPercent: reduced ? 0 : 110 });
-      gsap.set(".hero-fade", { opacity: 0, y: reduced ? 0 : 26 });
-      gsap.set(".hero-tagline", { opacity: 0, letterSpacing: reduced ? "0.35em" : "0.9em" });
+      if (!reduced) {
+        gsap.set(".hero-fade", { y: 26, filter: "blur(8px)" });
+        gsap.set(".hero-tagline", { filter: "blur(10px)" });
+      }
       gsap.set(".hero-glow", { opacity: 0 });
 
       entrance.current = gsap
         .timeline({ paused: true, defaults: { ease: "expo.out" } })
         .to(".hero-glow", { opacity: 1, duration: 2, ease: "power2.out" }, 0)
         .to(".pt-letter-wrap > span", { yPercent: 0, duration: 1.5, stagger: 0.07 }, 0.05)
-        .to(".hero-tagline", { opacity: 1, letterSpacing: "0.35em", duration: 1.6, ease: "power3.out" }, 0.45)
-        .to(".hero-fade", { opacity: 1, y: 0, duration: 1.1, stagger: 0.1, ease: "power3.out" }, 0.6);
+        .to(".hero-tagline", { filter: "blur(0px)", duration: 1.4, ease: "power3.out" }, 0.45)
+        .to(".hero-fade", { y: 0, filter: "blur(0px)", duration: 1.1, stagger: 0.1, ease: "power3.out" }, 0.6);
 
       if (reduced) return;
 
@@ -61,7 +65,7 @@ export default function Hero() {
       className="relative h-[100svh] min-h-[560px] overflow-hidden bg-ink"
       aria-labelledby="hero-title"
     >
-      <ParticlesField className="absolute inset-0" />
+      <ParticlesField className="absolute inset-0" active={introDone} />
       <div
         aria-hidden="true"
         className="hero-glow pointer-events-none absolute left-1/2 top-1/2 h-[70vmin] w-[110vmin] animate-glow-pulse rounded-full bg-[radial-gradient(closest-side,rgb(47_107_255/0.42),rgb(13_42_138/0.22)_50%,transparent)] blur-2xl"
@@ -82,11 +86,11 @@ export default function Hero() {
             {me.fullName} — {t.profile.role}
           </h1>
           <div className="hero-word w-full will-change-transform">
-            <PressureText text={me.heroWord} />
+            <PressureText text={me.heroWord} active={introDone} />
           </div>
           <p
             aria-hidden="true"
-            className="hero-tagline pointer-events-none relative mt-6 text-center font-spaced text-[0.62rem] font-bold uppercase leading-relaxed text-volt drop-shadow-[0_0_14px_rgb(47_107_255/0.7)] md:absolute md:inset-x-0 md:top-1/2 md:mt-0 md:-translate-y-1/2 md:text-[clamp(0.55rem,1.25vw,0.9rem)]"
+            className="hero-tagline pointer-events-none relative mt-6 text-center font-spaced text-[0.62rem] font-bold uppercase leading-relaxed tracking-[0.35em] text-volt drop-shadow-[0_0_14px_rgb(47_107_255/0.7)] md:absolute md:inset-x-0 md:top-1/2 md:mt-0 md:-translate-y-1/2 md:text-[clamp(0.55rem,1.25vw,0.9rem)]"
           >
             {t.profile.tagline}
           </p>

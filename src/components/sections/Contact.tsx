@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
-import emailjs from "@emailjs/browser";
 import { useReveal } from "@/lib/useReveal";
 import { useApp } from "@/components/layout/Providers";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -59,6 +58,8 @@ export default function Contact() {
 
     setStatus("sending");
     try {
+      // EmailJS se descarga solo al enviar (no pesa en la carga inicial)
+      const { default: emailjs } = await import("@emailjs/browser");
       await emailjs.send(
         serviceId,
         templateId,
@@ -112,42 +113,50 @@ export default function Contact() {
           <div data-reveal className="rounded-3xl border border-line/10 bg-graphite/70 p-7 sm:p-9">
             <h3 className="font-display text-2xl font-bold text-bone">{c.details}</h3>
 
-            <dl className="mt-8 space-y-6">
-              <div className="flex items-start gap-4">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-volt/30 bg-volt/10 text-volt-light">
+            {/* Lista simple (ul/li): cada dato lleva un ícono decorativo, que un <dl> no admite */}
+            <ul className="mt-8 space-y-6">
+              <li className="flex items-start gap-4">
+                <span
+                  aria-hidden="true"
+                  className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-volt/30 bg-volt/10 text-volt-light"
+                >
                   <MailIcon className="h-[18px] w-[18px]" />
                 </span>
                 <div className="min-w-0">
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash">{c.email}</dt>
-                  <dd className="mt-1">
-                    <a href={`mailto:${me.email}`} className="break-all font-medium text-bone hover:text-volt-light">
-                      {me.email}
-                    </a>
-                  </dd>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash">{c.email}</p>
+                  <a href={`mailto:${me.email}`} className="mt-1 block break-all font-medium text-bone hover:text-volt-light">
+                    {me.email}
+                  </a>
                 </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-volt/30 bg-volt/10 text-volt-light">
+              </li>
+              <li className="flex items-start gap-4">
+                <span
+                  aria-hidden="true"
+                  className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-volt/30 bg-volt/10 text-volt-light"
+                >
                   <PinIcon className="h-[18px] w-[18px]" />
                 </span>
                 <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash">{c.location}</dt>
-                  <dd className="mt-1 font-medium text-bone">{t.profile.location}</dd>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash">{c.location}</p>
+                  <p className="mt-1 font-medium text-bone">{t.profile.location}</p>
                 </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-signal/30 bg-signal/10">
+              </li>
+              <li className="flex items-start gap-4">
+                <span
+                  aria-hidden="true"
+                  className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-signal/30 bg-signal/10"
+                >
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="absolute inline-flex h-full w-full animate-ping-slow rounded-full bg-signal opacity-70" />
                     <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-signal" />
                   </span>
                 </span>
                 <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash">{c.availability}</dt>
-                  <dd className="mt-1 font-medium text-signal">{t.profile.availability}</dd>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash">{c.availability}</p>
+                  <p className="mt-1 font-medium text-signal">{t.profile.availability}</p>
                 </div>
-              </div>
-            </dl>
+              </li>
+            </ul>
 
             <div className="mt-9 border-t border-line/10 pt-7">
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash">{c.socials}</p>
@@ -250,7 +259,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="mt-7 w-full rounded-full bg-volt px-6 py-4 text-sm font-semibold tracking-wide text-white shadow-[0_10px_40px_-12px_rgb(47_107_255/0.9)] transition-[background-color,box-shadow,transform] duration-300 hover:bg-[#4179ff] hover:shadow-[0_14px_60px_-10px_rgb(47_107_255/1)] active:scale-[0.99] disabled:cursor-wait disabled:opacity-70"
+              className="mt-7 w-full rounded-full bg-cta px-6 py-4 text-sm font-semibold tracking-wide text-white shadow-[0_10px_40px_-12px_rgb(47_107_255/0.9)] transition-[background-color,box-shadow,transform] duration-300 hover:bg-cta-hover hover:shadow-[0_14px_60px_-10px_rgb(47_107_255/1)] active:scale-[0.99] disabled:cursor-wait disabled:opacity-70"
             >
               {status === "sending" ? c.sending : c.send}
             </button>

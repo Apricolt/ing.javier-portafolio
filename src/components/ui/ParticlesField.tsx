@@ -5,8 +5,13 @@ import { useEffect, useRef } from "react";
 type Particle = { x: number; y: number; r: number; vx: number; vy: number; a: number; tw: number; blue: boolean };
 
 /** Polvo de luz que flota lentamente detrás del hero. */
-export default function ParticlesField({ className = "" }: { className?: string }) {
+export default function ParticlesField({ className = "", active = true }: { className?: string; active?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // Mientras no esté activo (p. ej. detrás del preloader) no se anima: ahorra procesador en la carga
+  const activeRef = useRef(active);
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -62,7 +67,7 @@ export default function ParticlesField({ className = "" }: { className?: string 
 
     const loop = (t: number) => {
       raf = requestAnimationFrame(loop);
-      if (!visible) return;
+      if (!visible || !activeRef.current) return;
       for (const p of particles) {
         p.x += p.vx;
         p.y += p.vy;

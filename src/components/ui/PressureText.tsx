@@ -5,6 +5,8 @@ import { useEffect, useRef } from "react";
 type Props = {
   text: string;
   className?: string;
+  /** Si es false, el efecto queda quieto (p. ej. detrás del preloader) */
+  active?: boolean;
 };
 
 // Rango de ejes de Roboto Flex
@@ -14,10 +16,19 @@ const WGHT = { min: 120, max: 1000 };
 /**
  * Palabra gigante cuyas letras se ensanchan y engrosan según la cercanía del cursor.
  * Sin cursor (táctil o inactivo) un "cursor virtual" recorre la palabra en bucle.
+ *
+ * Para no provocar saltos de diseño (CLS), cada letra tiene una posición fija
+ * (absoluta) y solo cambia su propio ancho; el tamaño se calcula con CSS.
  */
-export default function PressureText({ text, className = "" }: Props) {
+export default function PressureText({ text, className = "", active = true }: Props) {
   const wrap = useRef<HTMLDivElement>(null);
+  const activeRef = useRef(active);
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
   const spans = useRef<HTMLSpanElement[]>([]);
+  const chars = text.split("");
+  const n = chars.length;
 
   useEffect(() => {
     const el = wrap.current;
@@ -25,22 +36,14 @@ export default function PressureText({ text, className = "" }: Props) {
     const letters = spans.current.filter(Boolean);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const fit = () => {
-      const byWidth = el.clientWidth / (text.length * 0.6);
-      const byHeight = window.innerHeight * 0.42;
-      el.style.fontSize = `${Math.min(byWidth, byHeight)}px`;
-    };
-    fit();
-
     const paint = (i: number, w: number, g: number, o: number) => {
-      letters[i].style.fontVariationSettings = `'wdth' ${w.toFixed(1)}, 'wght' ${g.toFixed(0)}, 'opsz' 144`;
+      letters[i].style.fontVariationSettings = `'wdth' ${w.toFixed(1)}, 'wght' ${g.toFixed(0)}`;
       letters[i].style.opacity = o.toFixed(3);
     };
 
     if (reduced) {
       letters.forEach((_, i) => paint(i, 100, 700, 1));
-      window.addEventListener("resize", fit);
-      return () => window.removeEventListener("resize", fit);
+      return;
     }
 
     const current = letters.map(() => ({ w: 60, g: 300, o: 0.6 }));
@@ -58,7 +61,7 @@ export default function PressureText({ text, className = "" }: Props) {
 
     const loop = (now: number) => {
       raf = requestAnimationFrame(loop);
-      if (!visible) return;
+      if (!visible || !activeRef.current) return;
 
       const box = el.getBoundingClientRect();
       let px: number;
@@ -94,14 +97,12 @@ export default function PressureText({ text, className = "" }: Props) {
     const io = new IntersectionObserver(([entry]) => (visible = entry.isIntersecting));
     io.observe(el);
     window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("resize", fit);
     raf = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect();
       window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("resize", fit);
     };
   }, [text]);
 
@@ -109,21 +110,35 @@ export default function PressureText({ text, className = "" }: Props) {
     <div
       ref={wrap}
       aria-hidden="true"
-      className={`flex w-full select-none items-center justify-between font-flex uppercase leading-[0.82] text-bone ${className}`}
+      className={`w-full select-none font-flex uppercase leading-[0.82] text-bone [container-type:inline-size] ${className}`}
     >
-      {text.split("").map((ch, i) => (
-        <span key={i} className="pt-letter-wrap inline-block overflow-hidden px-[0.02em]">
-          <span
-            ref={(node) => {
-              if (node) spans.current[i] = node;
-            }}
-            className="pt-letter inline-block will-change-[font-variation-settings]"
-            style={{ fontVariationSettings: "'wdth' 60, 'wght' 300, 'opsz' 144", opacity: 0.6 }}
-          >
-            {ch}
-          </span>
-        </span>
-      ))}
+      {/* Tamaño solo con CSS: el ancho disponible o el 42% del alto de pantalla, lo que sea menor */}
+      <div
+        className="relative"
+        style={{ fontSize: `min(${(100 / (n * 0.6)).toFixed(2)}cqw, 42vh)`, height: "0.82em" }}
+      >
+        {chars.map((ch, i) => {
+          // Distribuye las letras de borde a borde (como justify-between) sin depender de su ancho
+          const p = n > 1 ? i / (n - 1) : 0.5;
+          return (
+            <span
+              key={i}
+              className="pt-letter-wrap absolute top-0 inline-block overflow-hidden px-[0.02em]"
+              style={{ left: `${p * 100}%`, transform: `translateX(${-p * 100}%)` }}
+            >
+              <span
+                ref={(node) => {
+                  if (node) spans.current[i] = node;
+                }}
+                className="pt-letter inline-block will-change-[font-variation-settings]"
+                style={{ fontVariationSettings: "'wdth' 60, 'wght' 300", opacity: 0.6 }}
+              >
+                {ch}
+              </span>
+            </span>
+          );
+        })}
+      </div>
     </div>
   );
 }

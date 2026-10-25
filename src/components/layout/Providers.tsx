@@ -93,6 +93,18 @@ export default function Providers({ children }: { children: ReactNode }) {
   }, [locale]);
 
   useEffect(() => {
+    // Reactiva las transiciones CSS cuando el tema ya quedó aplicado (dos cuadros después)
+    let r2 = 0;
+    const r1 = requestAnimationFrame(() => {
+      r2 = requestAnimationFrame(() => document.documentElement.classList.remove("no-transitions"));
+    });
+    return () => {
+      cancelAnimationFrame(r1);
+      cancelAnimationFrame(r2);
+    };
+  }, []);
+
+  useEffect(() => {
     // Siempre empezar arriba: el preloader y el hero esperan esa posición
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     window.scrollTo(0, 0);

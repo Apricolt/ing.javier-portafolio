@@ -85,10 +85,14 @@ export default function Header() {
           href="#inicio"
           onClick={go("#inicio")}
           className="pointer-events-auto font-display text-xl font-bold tracking-tight text-bone"
-          aria-label={`${me.name} — ${t.ui.home}`}
         >
           {me.initials}
           <span className="text-volt">.</span>
+          {/* El nombre accesible empieza con el texto visible ("JO.") y luego lo explica */}
+          <span className="sr-only">
+            {" "}
+            — {me.name}, {t.ui.home}
+          </span>
         </a>
 
         <div className="flex items-center gap-2">
@@ -96,17 +100,22 @@ export default function Header() {
           <button
             type="button"
             onClick={toggleLocale}
-            aria-label={t.ui.lang.aria}
+            lang={t.ui.lang.target.toLowerCase()}
             className={`${pill} group flex h-[42px] items-center gap-2 px-3.5 text-sm font-semibold`}
           >
+            {/* Nombre accesible como texto oculto; lo visible es decorativo */}
+            <span className="sr-only">{t.ui.lang.aria}</span>
             <GlobeIcon className="h-4 w-4 transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:rotate-180" />
-            <span className="relative block h-5 overflow-hidden">
+            <span aria-hidden="true" className="relative block h-5 overflow-hidden">
               <span className="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-5">
                 <span className="block h-5 leading-5">{t.ui.lang.current}</span>
                 <span className="block h-5 leading-5 text-volt-light">{t.ui.lang.target}</span>
               </span>
             </span>
-            <span className="hidden max-w-0 overflow-hidden whitespace-nowrap font-medium text-ash opacity-0 transition-[max-width,opacity] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:max-w-[72px] group-hover:opacity-100 sm:block">
+            <span
+              aria-hidden="true"
+              className="hidden max-w-0 overflow-hidden whitespace-nowrap font-medium text-ash opacity-0 transition-[max-width,opacity] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:max-w-[72px] group-hover:opacity-100 sm:block"
+            >
               {t.ui.lang.targetName}
             </span>
           </button>

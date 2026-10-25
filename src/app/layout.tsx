@@ -9,11 +9,11 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 const space = Space_Grotesk({ subsets: ["latin"], variable: "--font-space", display: "swap" });
 const josefin = Josefin_Sans({ subsets: ["latin"], variable: "--font-josefin", display: "swap" });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap" });
-// Fuente variable: el nombre del hero anima su ancho y peso con el cursor
+// Fuente variable: el nombre del hero anima su ancho y peso con el cursor (solo el eje de ancho, más liviana)
 const flex = Roboto_Flex({
   subsets: ["latin"],
   variable: "--font-flex",
-  axes: ["wdth", "opsz"],
+  axes: ["wdth"],
   display: "swap",
 });
 
@@ -71,7 +71,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       lang="es"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${inter.variable} ${space.variable} ${josefin.variable} ${jetbrains.variable} ${flex.variable}`}
+      className={`no-transitions ${inter.variable} ${space.variable} ${josefin.variable} ${jetbrains.variable} ${flex.variable}`}
     >
       <body className="antialiased">
         <Script id="theme-init" strategy="beforeInteractive">
