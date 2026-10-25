@@ -1,7 +1,7 @@
 # Portafolio — Javier Ordoñez
 
 Portafolio personal de **Javier Alejandro Ordoñez Sapuyes**, Ingeniero de Software.
-Publicado en https://ing.jaos-portafolio.vercel.app
+Publicado en https://javordev.vercel.app
 
 Presentación en video: https://youtu.be/9w82mZpMY0I
 

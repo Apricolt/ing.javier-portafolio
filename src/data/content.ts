@@ -5,7 +5,7 @@ export type Locale = "es" | "en";
 
 export const site = {
   // Dominio público. Para cambiarlo sin tocar código, define NEXT_PUBLIC_SITE_URL en Vercel.
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://ing.jaos-portafolio.vercel.app").replace(/\/+$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://javordev.vercel.app").replace(/\/+$/, ""),
   // Título y descripción para Google (≈60 y ≈155 caracteres, lo que muestra el buscador)
   title: "Javier Ordoñez | Ingeniero de Software en Pasto, Colombia",
   description:
