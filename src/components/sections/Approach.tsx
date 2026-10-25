@@ -2,12 +2,11 @@
 
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import AbstractVisual from "@/components/ui/AbstractVisual";
 import KoiPond from "@/components/ui/KoiPond";
 import { useApp } from "@/components/layout/Providers";
 
 /**
- * "Mi enfoque": una ventana pequeña con el visual generativo y los koi,
+ * "Mi enfoque": una ventana pequeña con los koi sobre un fondo limpio,
  * que crece hasta ocupar toda la pantalla mientras se hace scroll.
  */
 export default function Approach() {
@@ -71,10 +70,8 @@ export default function Approach() {
     <section id="enfoque" ref={root} className="relative h-[260vh] bg-[#050505]" aria-labelledby="enfoque-title">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <div className="ap-frame absolute left-1/2 top-1/2 h-[44vh] w-[34vw] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[28px] border border-white/10 [container-type:size]">
-          {/* El lienzo mide siempre lo mismo que la pantalla; el marco actúa como ventana */}
-          <div className="grain absolute left-1/2 top-1/2 h-[100svh] w-screen -translate-x-1/2 -translate-y-1/2">
-            <AbstractVisual />
-          </div>
+          {/* Fondo limpio: azul profundo con un brillo suave en el centro (mide lo mismo que la pantalla) */}
+          <div className="absolute left-1/2 top-1/2 h-[100svh] w-screen -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(ellipse_at_center,#0b2a8f_0%,#061033_42%,#02040c_100%)]" />
           {/* Los koi crecen con la ventana: siempre ocupan el 90% de su lado más corto */}
           <div className="ap-koi pointer-events-none absolute inset-0 grid place-items-center">
             <div className="ap-koi-inner aspect-square w-[min(90cqw,90cqh)]">
