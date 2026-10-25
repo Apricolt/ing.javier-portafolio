@@ -114,6 +114,8 @@ export default function Contact() {
             <h3 className="font-display text-2xl font-bold text-bone">{c.details}</h3>
 
             {/* Lista simple (ul/li): cada dato lleva un ícono decorativo, que un <dl> no admite */}
+            {/* <address>: etiqueta estándar para los datos de contacto del autor de la página */}
+            <address className="not-italic">
             <ul className="mt-8 space-y-6">
               <li className="flex items-start gap-4">
                 <span
@@ -157,6 +159,7 @@ export default function Contact() {
                 </div>
               </li>
             </ul>
+            </address>
 
             <div className="mt-9 border-t border-line/10 pt-7">
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash">{c.socials}</p>

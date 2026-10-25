@@ -8,10 +8,12 @@ import Certifications from "@/components/sections/Certifications";
 import TechStack from "@/components/sections/TechStack";
 import Experience from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
+import JsonLd from "@/components/seo/JsonLd";
 
 export default function Home() {
   return (
     <>
+      <JsonLd />
       <Preloader />
       <Header />
       <main>

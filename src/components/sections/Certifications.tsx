@@ -57,6 +57,7 @@ export default function Certifications() {
                       className="group/link inline-flex items-center gap-2 text-sm font-semibold text-bone transition-colors hover:text-volt-light"
                     >
                       {t.ui.verify}
+                      <span className="sr-only">: {c.title}</span>
                       <ArrowUpRightIcon className="h-4 w-4 transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
                     </a>
                   ) : (

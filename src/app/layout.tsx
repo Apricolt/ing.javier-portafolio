@@ -19,11 +19,15 @@ const flex = Roboto_Flex({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: site.title,
+  title: { default: site.title, template: `%s | ${me.name}` },
   description: site.description,
+  applicationName: me.name,
   keywords: [
     "Javier Ordoñez",
+    "Javier Alejandro Ordoñez Sapuyes",
     "Ingeniero de Software",
+    "Ingeniero de Software Pasto",
+    "Desarrollador de software Colombia",
     "Software Engineer",
     "Inteligencia Artificial",
     "GeneXus",
@@ -32,16 +36,23 @@ export const metadata: Metadata = {
     "Automatización de pruebas",
     "Next.js",
     "Pasto",
+    "Nariño",
     "Colombia",
   ],
   authors: [{ name: me.fullName, url: site.url }],
   creator: me.fullName,
+  publisher: me.fullName,
+  category: "technology",
+  // URL oficial de la página (evita contenido duplicado entre dominios)
+  alternates: { canonical: "/" },
   openGraph: {
+    type: "profile",
+    firstName: "Javier",
+    lastName: "Ordoñez",
     title: site.title,
     description: site.description,
-    url: site.url,
+    url: "/",
     siteName: me.name,
-    type: "website",
     locale: "es_CO",
     alternateLocale: ["en_US"],
   },
@@ -50,7 +61,21 @@ export const metadata: Metadata = {
     title: site.title,
     description: site.description,
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  // Código de Google Search Console: se pone como variable en Vercel (GOOGLE_SITE_VERIFICATION)
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 export const viewport: Viewport = {

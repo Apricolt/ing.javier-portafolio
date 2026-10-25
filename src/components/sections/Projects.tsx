@@ -93,6 +93,8 @@ export default function Projects() {
                           >
                             <span className="h-1.5 w-1.5 rounded-full bg-volt" />
                             {t.ui.liveSite}
+                            {/* Texto oculto: dice a qué proyecto lleva el enlace (accesibilidad y SEO) */}
+                            <span className="sr-only">: {p.title}</span>
                             <ArrowUpRightIcon className="h-3.5 w-3.5" />
                           </a>
                         )}

@@ -4,10 +4,12 @@
 export type Locale = "es" | "en";
 
 export const site = {
-  url: "https://ing.jaos-portafolio.vercel.app",
-  title: "Javier Ordoñez — Ingeniero de Software",
+  // Dominio público. Para cambiarlo sin tocar código, define NEXT_PUBLIC_SITE_URL en Vercel.
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://ing.jaos-portafolio.vercel.app").replace(/\/+$/, ""),
+  // Título y descripción para Google (≈60 y ≈155 caracteres, lo que muestra el buscador)
+  title: "Javier Ordoñez | Ingeniero de Software en Pasto, Colombia",
   description:
-    "Portafolio de Javier Alejandro Ordoñez Sapuyes, Ingeniero de Software en Pasto, Colombia, enfocado en integración con Inteligencia Artificial. GeneXus, SQL Server, automatización de pruebas e interfaces web modernas.",
+    "Ingeniero de Software en Pasto, Colombia. Desarrollo software con Inteligencia Artificial, GeneXus, SQL Server, automatización de pruebas y Next.js.",
 };
 
 /** Datos que no cambian con el idioma */
