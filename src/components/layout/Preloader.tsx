@@ -3,10 +3,10 @@
 import { useRef, useState } from "react";
 import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { useApp } from "./Providers";
-import { profile } from "@/data/profile";
+import { me } from "@/data/content";
 
 export default function Preloader() {
-  const { finishIntro, setScrollLocked } = useApp();
+  const { finishIntro, setScrollLocked, t } = useApp();
   const root = useRef<HTMLDivElement>(null);
   const counter = useRef<HTMLSpanElement>(null);
   const [hidden, setHidden] = useState(false);
@@ -65,7 +65,7 @@ export default function Preloader() {
       ref={root}
       className="fixed inset-0 z-[100] flex items-center justify-center bg-ink"
       role="status"
-      aria-label="Cargando portafolio"
+      aria-label={t.ui.loading}
     >
       <div className="pl-content flex w-[min(80vw,420px)] flex-col items-center">
         <span
@@ -78,13 +78,13 @@ export default function Preloader() {
           className="pl-name mt-4 overflow-hidden font-spaced text-xs tracking-[0.45em] text-ash sm:text-sm"
           aria-hidden="true"
         >
-          {profile.name.toUpperCase().split("").map((ch, i) => (
+          {me.name.toUpperCase().split("").map((ch, i) => (
             <span key={i} className="inline-block whitespace-pre">
               {ch}
             </span>
           ))}
         </p>
-        <div className="mt-7 h-px w-full bg-white/10">
+        <div className="mt-7 h-px w-full bg-line/10">
           <div className="pl-line h-full w-full origin-left bg-volt shadow-[0_0_12px_2px_rgb(47_107_255/0.6)]" />
         </div>
       </div>

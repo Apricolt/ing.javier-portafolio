@@ -47,11 +47,15 @@ export default function ParticlesField({ className = "" }: { className?: string 
 
     const draw = (t: number) => {
       ctx.clearRect(0, 0, w, h);
+      // En modo claro las partículas son oscuras para que se sigan viendo
+      const light = document.documentElement.dataset.theme === "light";
+      const base = light ? "17,17,20" : "237,237,240";
+      const blue = light ? "36,80,214" : "122,162,255";
       for (const p of particles) {
         const alpha = p.a * (0.6 + 0.4 * Math.sin(t * 0.0015 + p.tw));
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.blue ? `rgba(122,162,255,${alpha})` : `rgba(237,237,240,${alpha * 0.8})`;
+        ctx.fillStyle = p.blue ? `rgba(${blue},${alpha})` : `rgba(${base},${alpha * (light ? 0.5 : 0.8)})`;
         ctx.fill();
       }
     };

@@ -28,7 +28,7 @@ export default function SectionHeading({ id, eyebrow, title, subtitle, echo = fa
         tl.from(".sh-fade", { opacity: 0, y: 20, duration: 0.9, stagger: 0.1, ease: "power2.out" }, 0.25);
       }
     },
-    { scope: root },
+    { scope: root, dependencies: [title, subtitle], revertOnUpdate: true },
   );
 
   return (

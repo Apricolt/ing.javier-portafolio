@@ -21,7 +21,7 @@ export default function Button({ href, children, variant = "primary", className 
   const styles =
     variant === "primary"
       ? "bg-volt py-2.5 pl-2.5 pr-6 text-sm text-white shadow-[0_10px_40px_-10px_rgb(47_107_255/0.8)] hover:bg-[#4179ff] hover:shadow-[0_14px_60px_-8px_rgb(47_107_255/0.95)] sm:text-base"
-      : "border border-white/15 bg-white/[0.02] px-6 py-3 text-sm text-bone hover:border-white/35 hover:bg-white/[0.05]";
+      : "border border-line/15 bg-line/[0.02] px-6 py-3 text-sm text-bone hover:border-line/35 hover:bg-line/[0.05]";
 
   return (
     <a

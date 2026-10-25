@@ -1,5 +1,7 @@
 import { ImageResponse } from "next/og";
-import { profile } from "@/data/profile";
+import { content, me } from "@/data/content";
+
+const profile = { ...me, role: content.es.profile.role };
 
 export const alt = `${profile.name} — ${profile.role}`;
 export const size = { width: 1200, height: 630 };
@@ -32,7 +34,7 @@ export default function OpengraphImage() {
           <div style={{ marginTop: 24, fontSize: 36, color: "#7aa2ff" }}>{profile.role}</div>
         </div>
         <div style={{ display: "flex", fontSize: 24, color: "#9b9ba6" }}>
-          GeneXus · SQL Server · Automatización de pruebas · Next.js
+          Inteligencia Artificial · GeneXus · SQL Server · Next.js
         </div>
       </div>
     ),
