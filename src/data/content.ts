@@ -99,8 +99,9 @@ export type Certification = {
 };
 
 export type ExperienceItem = {
-  period: string;
-  org: string;
+  /** Opcionales: si no se ponen, no se muestran */
+  period?: string;
+  org?: string;
   type: string;
   role: string;
   description: string;
@@ -144,7 +145,7 @@ export type Content = {
     projects: { title: string; subtitle: string };
     certifications: { title: string; subtitle: string };
     stack: { eyebrow: string; title: string; subtitle: string };
-    experience: { eyebrow: string; title: string; subtitle: string };
+    experience: { eyebrow: string; title: string; subtitle: string; partTime: string };
     contact: { eyebrow: string; title: string; subtitle: string };
   };
   contact: {
@@ -168,6 +169,8 @@ export type Content = {
   projects: Project[];
   certifications: Certification[];
   experience: ExperienceItem[];
+  /** Bloque "Actividades de tiempo parcial", debajo de la experiencia principal */
+  partTime: ExperienceItem[];
 };
 
 const es: Content = {
@@ -201,7 +204,7 @@ const es: Content = {
       "Ingeniero de Software en Pasto, Colombia. Desarrollador de software enfocado en integración con Inteligencia Artificial.",
     approachTitle: ["MI", "ENFOQUE"],
     approach:
-      "Me apasiona la tecnología y aprendo de forma constante, compartiendo lo que descubro en el camino. Mi propósito con el software es hacerle más fácil el trabajo a otras personas: tengo una fuerte conciencia de clase y me pongo en el lugar de quien va a usar cada herramienta. Así construyo soluciones prácticas que aportan valor real a la sociedad.",
+      "Me apasiona la tecnología y aprendo de forma constante, compartiendo lo que descubro en el camino. Mi propósito con el software es hacerle más fácil el trabajo a otras personas. Me pongo en el lugar de quien va a usar cada herramienta.",
   },
   nav: [
     { label: "Proyectos", href: "#proyectos" },
@@ -224,6 +227,7 @@ const es: Content = {
       eyebrow: "Trayectoria",
       title: "Dónde he trabajado",
       subtitle: "Mi recorrido profesional y académico.",
+      partTime: "Actividades de tiempo parcial",
     },
     contact: {
       eyebrow: "Contacto",
@@ -359,14 +363,18 @@ const es: Content = {
       ],
       tags: ["UI", "UX", "Diseño gráfico"],
     },
+  ],
+  partTime: [
     {
-      period: "2023 — 2026",
-      org: "Universidad Cooperativa de Colombia",
-      type: "Educación",
-      role: "Ingeniería de Software",
-      description: "Pregrado en Ingeniería de Software en San Juan de Pasto.",
-      highlights: ["Formación complementaria en Scrum, Inteligencia Artificial y GeneXus 18."],
-      tags: ["Pregrado"],
+      type: "Tiempo parcial",
+      role: "Profesor de Matemáticas",
+      description: "Enseñanza de matemáticas para grupos de distintas edades y contextos sociales.",
+      highlights: [
+        "Preparé y adapté material didáctico y planes de clase según la edad, el nivel y las necesidades de cada grupo.",
+        "Acompañé a poblaciones vulnerables y a estudiantes de 11 a 16 años, con explicaciones claras y un ritmo ajustado a cada persona.",
+        "Fortalecí habilidades que hoy aplico en el desarrollo de software: comunicar ideas complejas de forma sencilla y ponerme en el lugar de quien aprende.",
+      ],
+      tags: ["Docencia", "Matemáticas", "Pedagogía"],
     },
   ],
 };
@@ -402,7 +410,7 @@ const en: Content = {
       "Software Engineer in Pasto, Colombia. Developer focused on integrating Artificial Intelligence into software.",
     approachTitle: ["MY", "APPROACH"],
     approach:
-      "I'm passionate about technology and I keep learning every day, sharing what I discover along the way. My purpose with software is to make other people's work easier: I have a strong class consciousness and I put myself in the shoes of whoever will use each tool. That's how I build practical solutions that bring real value to society.",
+      "I'm passionate about technology and I keep learning every day, sharing what I discover along the way. My purpose with software is to make other people's work easier. I put myself in the shoes of whoever will use each tool.",
   },
   nav: [
     { label: "Projects", href: "#proyectos" },
@@ -424,6 +432,7 @@ const en: Content = {
       eyebrow: "Journey",
       title: "Where I've worked",
       subtitle: "My professional and academic path.",
+      partTime: "Part-time activities",
     },
     contact: {
       eyebrow: "Contact",
@@ -530,13 +539,18 @@ const en: Content = {
       ],
       tags: ["UI", "UX", "Graphic design"],
     },
+  ],
+  partTime: [
     {
-      ...es.experience[3],
-      type: "Education",
-      role: "Software Engineering",
-      description: "Bachelor's degree in Software Engineering in San Juan de Pasto.",
-      highlights: ["Complementary training in Scrum, Artificial Intelligence and GeneXus 18."],
-      tags: ["Degree"],
+      type: "Part-time",
+      role: "Math Teacher",
+      description: "Math teaching for groups of different ages and social backgrounds.",
+      highlights: [
+        "Prepared and adapted teaching materials and lesson plans to each group's age, level and needs.",
+        "Supported vulnerable communities and students aged 11 to 16, with clear explanations at a pace suited to each learner.",
+        "Built skills I now apply to software development: explaining complex ideas simply and putting myself in the learner's shoes.",
+      ],
+      tags: ["Teaching", "Mathematics", "Pedagogy"],
     },
   ],
 };
