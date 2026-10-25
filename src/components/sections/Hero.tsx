@@ -17,22 +17,19 @@ export default function Hero() {
     () => {
       const reduced = prefersReducedMotion();
 
-      // Estado inicial (el preloader lo cubre mientras tanto). Los textos NO se ocultan con
-      // opacity: 0, para que el navegador los pinte desde el primer cuadro (mejora el LCP en
-      // móvil); su entrada es una subida con desenfoque.
+      // Estado inicial oculto (el preloader lo cubre mientras tanto)
       gsap.set(".pt-letter-wrap > span", { yPercent: reduced ? 0 : 110 });
-      if (!reduced) {
-        gsap.set(".hero-fade", { y: 26, filter: "blur(8px)" });
-        gsap.set(".hero-tagline", { filter: "blur(10px)" });
-      }
+      gsap.set(".hero-fade", { opacity: 0, y: reduced ? 0 : 26 });
+      // La frase entra con fundido y desenfoque (sin cambiar su tamaño)
+      gsap.set(".hero-tagline", { opacity: 0, filter: reduced ? "none" : "blur(10px)" });
       gsap.set(".hero-glow", { opacity: 0 });
 
       entrance.current = gsap
         .timeline({ paused: true, defaults: { ease: "expo.out" } })
         .to(".hero-glow", { opacity: 1, duration: 2, ease: "power2.out" }, 0)
         .to(".pt-letter-wrap > span", { yPercent: 0, duration: 1.5, stagger: 0.07 }, 0.05)
-        .to(".hero-tagline", { filter: "blur(0px)", duration: 1.4, ease: "power3.out" }, 0.45)
-        .to(".hero-fade", { y: 0, filter: "blur(0px)", duration: 1.1, stagger: 0.1, ease: "power3.out" }, 0.6);
+        .to(".hero-tagline", { opacity: 1, filter: "blur(0px)", duration: 1.4, ease: "power3.out" }, 0.45)
+        .to(".hero-fade", { opacity: 1, y: 0, duration: 1.1, stagger: 0.1, ease: "power3.out" }, 0.6);
 
       if (reduced) return;
 
