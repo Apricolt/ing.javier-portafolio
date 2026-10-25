@@ -47,6 +47,8 @@ export default function Approach() {
           .to(".ap-w2", { xPercent: 45, opacity: 0, duration: 0.45 }, 0)
           .to(".ap-hint", { opacity: 0, duration: 0.1 }, 0)
           .fromTo(".ap-koi-inner", { scale: 0.92 }, { scale: 1.06, duration: 0.85 }, 0)
+          // Los koi empiezan difuminados y se enfocan a medida que se hace scroll
+          .fromTo(".ap-koi-inner", { filter: "blur(16px)" }, { filter: "blur(0px)", duration: 0.5 }, 0)
           .to(".ap-koi", { opacity: 0.22, duration: 0.25 }, 0.5)
           .to(".ap-scrim", { opacity: 1, duration: 0.25 }, 0.5)
           .to(".ap-copy", { opacity: 1, y: 0, duration: 0.25 }, 0.6)
